@@ -1,0 +1,90 @@
+.main {
+  .descriptionSkill {
+    color: #fff;
+    &.physicalBack {
+      background: #1faddf;
+    }
+    &.socialEmotionalBack {
+      background: #d43571;
+    }
+    .titleText {
+      text-align: center;
+    }
+    .buttonsSkill {
+      justify-content: center;
+      .physical {
+        border-radius: 30px 0px 0px 30px;
+      }
+      .socialEmotional {
+        border-radius: 0px 30px 30px 0px;
+      }
+      .physical,
+      .socialEmotional {
+        width: 180px;
+        height: 50px;
+        font-size: 14px;
+        border: 1px solid #fff;
+        background: transparent;
+        border-color: #fff !important;
+        &:hover {
+          background: #fff;
+        }
+        &.physicalColor {
+          &:hover {
+            color: #1faddf;
+          }
+          &.active {
+            color: #1faddf;
+            background: #fff;
+          }
+        }
+        &.socialEmotionalColor {
+          &:hover {
+            color: #d43571;
+          }
+          &.active {
+            color: #d43571;
+            background: #fff;
+          }
+        }
+      }
+      .borderDiv {
+        width: 600px;
+        border-bottom: 1px solid #fff;
+        position: absolute;
+        top: 66px;
+      }
+    }
+    .description {
+      margin-top: 20px;
+      .titleSkill {
+        text-align: center;
+        margin: 15px 0px;
+      }
+      .textDescription {
+        padding: 0px 90px;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  .buttons {
+    background: #75b753;
+    border-color: #75b753;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 14px;
+    height: 40px;
+    &:hover {
+      background: #75b789;
+      border-color: #75b789;
+      color: #fff;
+    }
+  }
+  .buttonsSkill {
+    justify-content: center;
+    .step {
+      width: 250px;
+    }
+  }
+}
