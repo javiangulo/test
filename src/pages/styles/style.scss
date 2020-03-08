@@ -68,6 +68,14 @@
       }
     }
   }
+  .milestonesList {
+    h4 {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 0;
+    }
+  }
   .buttons {
     background: #75b753;
     border-color: #75b753;
@@ -85,6 +93,61 @@
     justify-content: center;
     .step {
       width: 250px;
+      margin-top: 15px;
+    }
+  }
+  .milestonesList {
+    height: calc(100vh - 389px);
+    overflow: auto;
+    .listItems {
+      .item {
+        border-left: none;
+        border-right: none;
+        box-shadow: 0px 0px 3px 1px #ebe2eb;
+        .title {
+          margin-bottom: 5px;
+          color: #a9b0b6;
+          font-weight: bold;
+          font-size: 16px;
+        }
+        .description {
+          font-size: 14px;
+          color: #bec6cc;
+        }
+        &:first-child {
+          border-top: none;
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+        .buttonsAnswer {
+          justify-content: center;
+          .buttons {
+            width: 200px;
+            text-transform: capitalize;
+            &.notAnswered {
+              background: #f0f0f0;
+              color: #b7b7b7;
+              border-color: #f0f0f0;
+              &:hover {
+                background: #ebeff7;
+                border-color: #ebeff7;
+                color: #6cba46;
+              }
+            }
+            &.uncompleted {
+              background: #ebeff7;
+              border-color: #ebeff7;
+              color: #6cba46;
+              &:hover {
+                background: #75b753;
+                border-color: #75b753;
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

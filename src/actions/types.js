@@ -1,0 +1,4 @@
+export const GET_DATA_SKILL2 = "GET_DATA_SKILL2";
+export const UPDATE_SKILL2 = "UPDATE_SKILL2";
+export const GET_DATA_SKILL23 = "GET_DATA_SKILL23";
+export const UPDATE_SKILL23 = "UPDATE_SKILL23";

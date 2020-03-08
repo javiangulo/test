@@ -1,69 +1,79 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Container, Row, ButtonToolbar, Button, Col } from "react-bootstrap";
 import "./styles/style.scss";
-
-const ShowSkill = () => {
-  const [selectedBack, setSelectedBack] = React.useState("physicalBack");
-  const [selectColor, setSelectedColor] = React.useState("physicalColor");
+import {
+  getDataSkill2,
+  getDataSkill23,
+  updateAnswer2,
+  updateAnswer23
+} from "../actions";
+import SkillDescriptionComponent from "../components/SkillDescriptionComponent";
+import _ from "lodash";
+import MilestonesComponent from "../components/MilestonesComponent";
+const ShowSkill = ({
+  skill2,
+  getDataSkill2,
+  skill23,
+  getDataSkill23,
+  updateAnswer2,
+  updateAnswer23
+}) => {
   const [skillActive, setSkillActive] = React.useState({
     physical: "active",
     socialEmotional: ""
   });
+  const [type, setType] = React.useState("physical");
+  const buttomText = {
+    physical: "next",
+    socialEmotional: "Finish Accessment"
+  };
+  let updateAnswer = updateAnswer2;
+  let data = {};
+  data = skill2.data || {};
+  if (type === "socialEmotional") {
+    updateAnswer = updateAnswer23;
+    data = skill23.data || {};
+  }
+  let infoSkill = data.skill || {};
 
-  const handleClickButton = type => {
-    setSelectedBack(`${type}Back`);
-    setSelectedColor(`${type}Color`);
-    Object.keys(skillActive).forEach(key => {
-      skillActive[key] = "";
-      if (key === type) {
-        skillActive[key] = "active";
-      }
-    });
-    setSkillActive({ ...skillActive });
+  if (_.isEmpty(skill2)) {
+    getDataSkill2();
+  }
+  if (_.isEmpty(skill23)) {
+    getDataSkill23();
+  }
+  const handleStepClick = () => {
+    if (type === "physical") {
+      setType("socialEmotional");
+      Object.keys(skillActive).forEach(key => {
+        skillActive[key] = "";
+        if (key === "socialEmotional") {
+          skillActive[key] = "active";
+        }
+      });
+      setSkillActive({ ...skillActive });
+    }
   };
   return (
     <Container className="main">
-      <Row className={`descriptionSkill ${selectedBack}`}>
-        <h2 className="titleText col-12">Areas</h2>
-        <Col className="col-12">
-          <ButtonToolbar className="buttonsSkill">
-            <Button
-              onClick={() => handleClickButton("physical")}
-              className={`physical ${selectColor} ${skillActive.physical}`}
-            >
-              Physical
-            </Button>
-            <Button
-              onClick={() => handleClickButton("socialEmotional")}
-              className={`socialEmotional ${selectColor}  ${skillActive.socialEmotional}`}
-            >
-              Social & Emotional area
-            </Button>
-            <div className="borderDiv"></div>
-          </ButtonToolbar>
-        </Col>
-        <Col className="col-12 description">
-          <h3 className="titleSkill col-12">
-            Skill: ahsjhajshjahsj jhaj shjas jhasj
-          </h3>
-          <p className="col-12 textDescription">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum
-          </p>
-        </Col>
-      </Row>
-      <Row>asas</Row>
+      <SkillDescriptionComponent
+        skill={infoSkill}
+        skillActive={skillActive}
+        setSkillActive={setSkillActive}
+        type={type}
+        setType={setType}
+      />
+      <MilestonesComponent
+        milestones={infoSkill.milestones}
+        updateAnswer={updateAnswer}
+      />
       <Row>
         <Col className="col-12">
           <ButtonToolbar className="buttonsSkill">
-            <Button className="buttons step">Physical</Button>
+            <Button className="buttons step" onClick={() => handleStepClick()}>
+              {buttomText[type]}
+            </Button>
           </ButtonToolbar>
         </Col>
       </Row>
@@ -71,4 +81,16 @@ const ShowSkill = () => {
   );
 };
 
-export default ShowSkill;
+const mapStateToProps = ({ skill2, skill23 }) => {
+  return {
+    skill2,
+    skill23
+  };
+};
+
+export default connect(mapStateToProps, {
+  getDataSkill2,
+  getDataSkill23,
+  updateAnswer2,
+  updateAnswer23
+})(ShowSkill);
