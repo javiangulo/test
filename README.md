@@ -2,9 +2,11 @@
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn install`
 
 Install the app packages.<br />
+
+Rename the .env.default to .env<br />
 
 ### `yarn start`
 
